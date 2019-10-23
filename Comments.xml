@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Penguin.Cms.Errors</name>
+    </assembly>
+    <members>
+        <member name="T:Penguin.Cms.Errors.AuditableError">
+            <summary>
+            Represents an auditable error to be persisted
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Errors.AuditableError.ErrorId">
+            <summary>
+            The generated int Id for the error provided by the environment
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Errors.AuditableError.Exception">
+            <summary>
+            The message provided with the error
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Errors.AuditableError.ExceptionType">
+            <summary>
+            The full name of the type of error that was thrown
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Errors.AuditableError.FormValues">
+            <summary>
+            Any form values that were posted if this was a web request.
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Errors.AuditableError.InnerException">
+            <summary>
+            The top level inner exception message
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Errors.AuditableError.RawReferrer">
+            <summary>
+            If a web exception, this is the referrer for the request
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Errors.AuditableError.RawRequestUrl">
+            <summary>
+            If a web exception, this is the Url that was requested
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Errors.AuditableError.Referrer">
+            <summary>
+            If a web exception, this is the referrer for the request
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Errors.AuditableError.RequestUrl">
+            <summary>
+            If a web exception, this is the Url that was requested
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Errors.AuditableError.StackTrace">
+            <summary>
+            The stack trace provided by the environment
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Errors.AuditableError.UserId">
+            <summary>
+            An ID representing the user that caused the error, or 0 if unknown
+            </summary>
+        </member>
+        <member name="M:Penguin.Cms.Errors.AuditableError.#ctor">
+            <summary>
+            Creates a new instance of this error class
+            </summary>
+        </member>
+        <member name="M:Penguin.Cms.Errors.AuditableError.#ctor(System.Exception)">
+            <summary>
+            Creates a new instance of this error class, and then fills it with information
+            </summary>
+            <param name="ex">The exception to use when filling this instance</param>
+        </member>
+        <member name="M:Penguin.Cms.Errors.Extensions.AuditableErrorRepositoryExtensions.Add(Penguin.Persistence.Abstractions.Interfaces.IRepository{Penguin.Cms.Errors.AuditableError},System.Exception,System.String,System.Nullable{System.Guid})">
+            <summary>
+            Adds a new exception to the underlying storage context
+            </summary>
+            <param name="errorRepository"></param>
+            <param name="ex">The exception to add</param>
+            <param name="url">If relevant, any URL associated with the error</param>
+            <param name="UserId">If relevant, the ID of the user that generated the error</param>
+        </member>
+        <member name="M:Penguin.Cms.Errors.Extensions.AuditableErrorRepositoryExtensions.TryAdd(Penguin.Persistence.Abstractions.Interfaces.IRepository{Penguin.Cms.Errors.AuditableError},System.Exception,System.Boolean,System.String,System.Nullable{System.Guid})">
+            <summary>
+            Opens a new writecontext, attempts to add an error, and closes the write context.
+            If the context was already open, it may not persist until it closes.
+            Can be called on a null repository. This will be treated as an error and caught/rethrown as
+            instructed by the "rethrow" parameter
+            </summary>
+            <param name="errorRepository">The Error repository to attempt to use as a source</param>
+            <param name="ex">The exception</param>
+            <param name="rethrow">If theres an error writing the error, should the error be rethrown?</param>
+            <param name="url">If relevant, any URL associated with the error</param>
+            <param name="UserId">If relevant, the ID of the user that generated the error</param>
+            <returns>False if an error occurs, regardless of whether or not it was rethrown</returns>
+        </member>
+        <member name="M:Penguin.Cms.Errors.Extensions.AuditableErrorRepositoryExtensions.TryAdd(Penguin.Persistence.Abstractions.Interfaces.IRepository{Penguin.Cms.Errors.AuditableError},System.String,System.Boolean,System.String,System.Nullable{System.Guid})">
+            <summary>
+            Opens a new writecontext, attempts to add an error, and closes the write context.
+            If the context was already open, it may not persist until it closes.
+            Can be called on a null repository. This will be treated as an error and caught/rethrown as
+            instructed by the "rethrow" parameter
+            </summary>
+            <param name="errorRepository">The Error repository to attempt to use as a source</param>
+            <param name="error">The exception</param>
+            <param name="rethrow">If theres an error writing the error, should the error be rethrown?</param>
+            <param name="url">If relevant, any URL associated with the error</param>
+            <param name="UserId">If relevant, the ID of the user that generated the error</param>
+            <returns>False if an error occurs, regardless of whether or not it was rethrown</returns>
+        </member>
+    </members>
+</doc>
