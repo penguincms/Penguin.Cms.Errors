@@ -4,7 +4,6 @@ using Penguin.Extensions.Exceptions;
 using Penguin.Persistence.Abstractions.Attributes.Control;
 using Penguin.Persistence.Abstractions.Attributes.Validation;
 using System;
-using System.Diagnostics.Contracts;
 
 namespace Penguin.Cms.Errors
 {
@@ -84,7 +83,7 @@ namespace Penguin.Cms.Errors
         public string StackTrace { get; set; }
 
         /// <summary>
-        /// An ID representing the user that caused the error, or 0 if unknown
+        /// An ID representing the user that caused the error, or empty if unknown
         /// </summary>
 
         [DontAllow(DisplayContexts.List | DisplayContexts.Edit)]
@@ -96,19 +95,95 @@ namespace Penguin.Cms.Errors
         public AuditableError()
         {
             this.UserId = Guid.Empty;
+
             this.DateCreated = DateTime.Now;
+
+            this.MachineName = TryGet(() => System.Environment.MachineName);
+
+            this.ApplicationName = TryGet(() => System.AppDomain.CurrentDomain.FriendlyName);
+
+            this.ApplicationIdentity = TryGet(() => System.Environment.UserName);
+
+            this.ExecutionDirectory = TryGet(() => System.Environment.CurrentDirectory);
+
+            this.Os64Bit = TryGet(() => System.Environment.Is64BitOperatingSystem);
+
+            this.ClrVersion = TryGet(() => System.Environment.Version.ToString());
+
+            this.OsVersionString = TryGet(() => System.Environment.OSVersion.VersionString);
         }
+
+        private static string TryGet(Func<string> func)
+        {
+            try
+            {
+                return func.Invoke();
+            }
+            catch (Exception)
+            {
+                return "Error Retrieving Value";
+            }
+        }
+
+        private static T TryGet<T>(Func<T> func)
+        {
+            try
+            {
+                return func.Invoke();
+            }
+            catch (Exception)
+            {
+                return default;
+            }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public bool Os64Bit { get; set; }
+
+        /// <summary>
+        /// The current OS version
+        /// </summary>
+        public string OsVersionString { get; set; }
+
+        /// <summary>
+        /// The Clr Version of the executing application
+        /// </summary>
+
+        public string ClrVersion { get; set; }
+
+        /// <summary>
+        /// The directory of the executing application
+        /// </summary>
+        public string ExecutionDirectory { get; set; }
+
+        /// <summary>
+        /// The friendly name of the current domain
+        /// </summary>
+        public string ApplicationName { get; set; }
+
+        /// <summary>
+        /// The name of the machine that threw the error
+        /// </summary>
+        public string MachineName { get; set; }
+
+        /// <summary>
+        /// The identity the faulting application was executing under
+        /// </summary>
+        public string ApplicationIdentity { get; set; }
 
         /// <summary>
         /// Creates a new instance of this error class, and then fills it with information
         /// </summary>
         /// <param name="ex">The exception to use when filling this instance</param>
-        public AuditableError(Exception ex)
+        public AuditableError(Exception ex) : this()
         {
-            Contract.Requires(ex != null);
+            if (ex is null)
+            {
+                throw new ArgumentNullException(nameof(ex));
+            }
 
-            this.UserId = Guid.Empty;
-            this.DateCreated = DateTime.Now;
             this.StackTrace = string.Empty;
             Type exceptionType = ex.GetType();
             this.ExceptionType = exceptionType.ToString();
