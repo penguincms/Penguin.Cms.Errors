@@ -14,6 +14,18 @@ namespace Penguin.Cms.Errors
     public class AuditableError : Entity
     {
         /// <summary>
+        /// The identity the faulting application was executing under
+        /// </summary>
+        public string ApplicationIdentity { get; set; }
+
+        /// <summary>
+        /// The friendly name of the current domain
+        /// </summary>
+        public string ApplicationName { get; set; }
+
+        public string ClrVersion { get; set; }
+
+        /// <summary>
         /// The generated int Id for the error provided by the environment
         /// </summary>
         [DontAllow(DisplayContexts.List | DisplayContexts.Edit)]
@@ -37,6 +49,14 @@ namespace Penguin.Cms.Errors
         /// Any form values that were posted if this was a web request.
         /// </summary>
 
+        /// <summary>
+        /// The Clr Version of the executing application
+        /// </summary>
+        /// <summary>
+        /// The directory of the executing application
+        /// </summary>
+        public string ExecutionDirectory { get; set; }
+
         [DontAllow(DisplayContexts.List | DisplayContexts.Edit)]
         public string FormValues { get; set; }
 
@@ -50,6 +70,21 @@ namespace Penguin.Cms.Errors
         /// <summary>
         /// If a web exception, this is the referrer for the request
         /// </summary>
+
+        /// <summary>
+        /// The name of the machine that threw the error
+        /// </summary>
+        public string MachineName { get; set; }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public bool Os64Bit { get; set; }
+
+        /// <summary>
+        /// The current OS version
+        /// </summary>
+        public string OsVersionString { get; set; }
 
         [DontAllow(DisplayContexts.List | DisplayContexts.Edit)]
         public string RawReferrer { get; set; }
@@ -113,66 +148,6 @@ namespace Penguin.Cms.Errors
             this.OsVersionString = TryGet(() => System.Environment.OSVersion.VersionString);
         }
 
-        private static string TryGet(Func<string> func)
-        {
-            try
-            {
-                return func.Invoke();
-            }
-            catch (Exception)
-            {
-                return "Error Retrieving Value";
-            }
-        }
-
-        private static T TryGet<T>(Func<T> func)
-        {
-            try
-            {
-                return func.Invoke();
-            }
-            catch (Exception)
-            {
-                return default;
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public bool Os64Bit { get; set; }
-
-        /// <summary>
-        /// The current OS version
-        /// </summary>
-        public string OsVersionString { get; set; }
-
-        /// <summary>
-        /// The Clr Version of the executing application
-        /// </summary>
-
-        public string ClrVersion { get; set; }
-
-        /// <summary>
-        /// The directory of the executing application
-        /// </summary>
-        public string ExecutionDirectory { get; set; }
-
-        /// <summary>
-        /// The friendly name of the current domain
-        /// </summary>
-        public string ApplicationName { get; set; }
-
-        /// <summary>
-        /// The name of the machine that threw the error
-        /// </summary>
-        public string MachineName { get; set; }
-
-        /// <summary>
-        /// The identity the faulting application was executing under
-        /// </summary>
-        public string ApplicationIdentity { get; set; }
-
         /// <summary>
         /// Creates a new instance of this error class, and then fills it with information
         /// </summary>
@@ -195,6 +170,30 @@ namespace Penguin.Cms.Errors
 
             this.Exception = ex.RecursiveMessage();
             this.StackTrace += ex.RecursiveStackTrace();
+        }
+
+        private static string TryGet(Func<string> func)
+        {
+            try
+            {
+                return func.Invoke();
+            }
+            catch (Exception)
+            {
+                return "Error Retrieving Value";
+            }
+        }
+
+        private static T TryGet<T>(Func<T> func)
+        {
+            try
+            {
+                return func.Invoke();
+            }
+            catch (Exception)
+            {
+                return default;
+            }
         }
     }
 }

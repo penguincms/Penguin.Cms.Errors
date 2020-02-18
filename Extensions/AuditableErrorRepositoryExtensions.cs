@@ -1,7 +1,5 @@
 ﻿using Penguin.Persistence.Abstractions.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Penguin.Cms.Errors.Extensions
 {
