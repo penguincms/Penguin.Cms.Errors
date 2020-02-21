@@ -9,6 +9,16 @@
             Represents an auditable error to be persisted
             </summary>
         </member>
+        <member name="P:Penguin.Cms.Errors.AuditableError.ApplicationIdentity">
+            <summary>
+            The identity the faulting application was executing under
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Errors.AuditableError.ApplicationName">
+            <summary>
+            The friendly name of the current domain
+            </summary>
+        </member>
         <member name="P:Penguin.Cms.Errors.AuditableError.ErrorId">
             <summary>
             The generated int Id for the error provided by the environment
@@ -24,9 +34,15 @@
             The full name of the type of error that was thrown
             </summary>
         </member>
-        <member name="P:Penguin.Cms.Errors.AuditableError.FormValues">
+        <member name="P:Penguin.Cms.Errors.AuditableError.ExecutionDirectory">
             <summary>
             Any form values that were posted if this was a web request.
+            </summary>
+            <summary>
+            The Clr Version of the executing application
+            </summary>
+            <summary>
+            The directory of the executing application
             </summary>
         </member>
         <member name="P:Penguin.Cms.Errors.AuditableError.InnerException">
@@ -34,9 +50,22 @@
             The top level inner exception message
             </summary>
         </member>
-        <member name="P:Penguin.Cms.Errors.AuditableError.RawReferrer">
+        <member name="P:Penguin.Cms.Errors.AuditableError.MachineName">
             <summary>
             If a web exception, this is the referrer for the request
+            </summary>
+            <summary>
+            The name of the machine that threw the error
+            </summary>
+        </member>
+        <member name="P:Penguin.Cms.Errors.AuditableError.Os64Bit">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:Penguin.Cms.Errors.AuditableError.OsVersionString">
+            <summary>
+            The current OS version
             </summary>
         </member>
         <member name="P:Penguin.Cms.Errors.AuditableError.RawRequestUrl">
@@ -67,40 +96,6 @@
         <member name="M:Penguin.Cms.Errors.AuditableError.#ctor">
             <summary>
             Creates a new instance of this error class
-            </summary>
-        </member>
-        <member name="P:Penguin.Cms.Errors.AuditableError.Os64Bit">
-             <summary>
-             </summary>
-        </member>
-        <member name="P:Penguin.Cms.Errors.AuditableError.OsVersionString">
-            <summary>
-            The current OS version
-            </summary>
-        </member>
-        <member name="P:Penguin.Cms.Errors.AuditableError.ClrVersion">
-            <summary>
-            The Clr Version of the executing application
-            </summary>
-        </member>
-        <member name="P:Penguin.Cms.Errors.AuditableError.ExecutionDirectory">
-            <summary>
-            The directory of the executing application
-            </summary>
-        </member>
-        <member name="P:Penguin.Cms.Errors.AuditableError.ApplicationName">
-            <summary>
-            The friendly name of the current domain
-            </summary>
-        </member>
-        <member name="P:Penguin.Cms.Errors.AuditableError.MachineName">
-            <summary>
-            The name of the machine that threw the error
-            </summary>
-        </member>
-        <member name="P:Penguin.Cms.Errors.AuditableError.ApplicationIdentity">
-            <summary>
-            The identity the faulting application was executing under
             </summary>
         </member>
         <member name="M:Penguin.Cms.Errors.AuditableError.#ctor(System.Exception)">
