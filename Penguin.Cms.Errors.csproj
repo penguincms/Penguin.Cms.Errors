@@ -12,6 +12,6 @@
   <ItemGroup>
     <PackageReference Include="Penguin.Auditing.Abstractions" Version="5.0.2-TA9KKLU" />
     <PackageReference Include="Penguin.Extensions.Exceptions" Version="5.0.2-TA9KKLU" />
-    <PackageReference Include="Penguin.Cms.Entities" Version="5.0.2-TA9KKLU" />
+    <PackageReference Include="Penguin.Cms.Entities" Version="5.0.2-TAA4YFP" />
   </ItemGroup>
 </Project>
