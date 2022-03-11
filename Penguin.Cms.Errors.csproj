@@ -10,8 +10,8 @@
     <DocumentationFile>Penguin.Cms.Errors.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Penguin.Auditing.Abstractions" Version="5.0.6-TAHULSY" />
-    <PackageReference Include="Penguin.Extensions.Exceptions" Version="5.0.6-TAHULSY" />
-    <PackageReference Include="Penguin.Cms.Entities" Version="5.0.6-TAHULSY" />
+    <PackageReference Include="Penguin.Auditing.Abstractions" Version="5.0.6-TATDFB4" />
+    <PackageReference Include="Penguin.Extensions.Exceptions" Version="5.0.6-TATDFB4" />
+    <PackageReference Include="Penguin.Cms.Entities" Version="5.0.6-TATDFB4" />
   </ItemGroup>
 </Project>
