@@ -80,6 +80,9 @@ namespace Penguin.Cms.Errors.Extensions
         /// <param name="url">If relevant, any URL associated with the error</param>
         /// <param name="UserId">If relevant, the ID of the user that generated the error</param>
         /// <returns>False if an error occurs, regardless of whether or not it was rethrown</returns>
-        public static bool TryAdd(this IRepository<AuditableError> errorRepository, string error, bool rethrow = false, string url = null, Guid? UserId = null) => errorRepository.TryAdd(new Exception(error), rethrow, url, UserId);
+        public static bool TryAdd(this IRepository<AuditableError> errorRepository, string error, bool rethrow = false, string url = null, Guid? UserId = null)
+        {
+            return errorRepository.TryAdd(new Exception(error), rethrow, url, UserId);
+        }
     }
 }
