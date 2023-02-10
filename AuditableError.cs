@@ -129,23 +129,23 @@ namespace Penguin.Cms.Errors
         /// </summary>
         public AuditableError()
         {
-            this.UserId = Guid.Empty;
+            UserId = Guid.Empty;
 
-            this.DateCreated = DateTime.Now;
+            DateCreated = DateTime.Now;
 
-            this.MachineName = TryGet(() => System.Environment.MachineName);
+            MachineName = TryGet(() => System.Environment.MachineName);
 
-            this.ApplicationName = TryGet(() => System.AppDomain.CurrentDomain.FriendlyName);
+            ApplicationName = TryGet(() => System.AppDomain.CurrentDomain.FriendlyName);
 
-            this.ApplicationIdentity = TryGet(() => System.Environment.UserName);
+            ApplicationIdentity = TryGet(() => System.Environment.UserName);
 
-            this.ExecutionDirectory = TryGet(() => System.Environment.CurrentDirectory);
+            ExecutionDirectory = TryGet(() => System.Environment.CurrentDirectory);
 
-            this.Os64Bit = TryGet(() => System.Environment.Is64BitOperatingSystem);
+            Os64Bit = TryGet(() => System.Environment.Is64BitOperatingSystem);
 
-            this.ClrVersion = TryGet(() => System.Environment.Version.ToString());
+            ClrVersion = TryGet(System.Environment.Version.ToString);
 
-            this.OsVersionString = TryGet(() => System.Environment.OSVersion.VersionString);
+            OsVersionString = TryGet(() => System.Environment.OSVersion.VersionString);
         }
 
         /// <summary>
@@ -159,17 +159,17 @@ namespace Penguin.Cms.Errors
                 throw new ArgumentNullException(nameof(ex));
             }
 
-            this.StackTrace = string.Empty;
+            StackTrace = string.Empty;
             Type exceptionType = ex.GetType();
-            this.ExceptionType = exceptionType.ToString();
+            ExceptionType = exceptionType.ToString();
 
             if (ex.InnerException != null)
             {
-                this.InnerException = ex.InnerException.RecursiveMessage();
+                InnerException = ex.InnerException.RecursiveMessage();
             }
 
-            this.Exception = ex.RecursiveMessage();
-            this.StackTrace += ex.RecursiveStackTrace();
+            Exception = ex.RecursiveMessage();
+            StackTrace += ex.RecursiveStackTrace();
         }
 
         private static string TryGet(Func<string> func)

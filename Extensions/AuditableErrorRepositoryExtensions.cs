@@ -19,7 +19,7 @@ namespace Penguin.Cms.Errors.Extensions
                 throw new ArgumentNullException(nameof(errorRepository));
             }
 
-            AuditableError thisError = new AuditableError(ex)
+            AuditableError thisError = new(ex)
             {
                 RequestUrl = url,
                 UserId = UserId ?? Guid.Empty
@@ -46,7 +46,7 @@ namespace Penguin.Cms.Errors.Extensions
             {
                 using (IWriteContext context = errorRepository?.WriteContext())
                 {
-                    AuditableError thisError = new AuditableError(ex)
+                    AuditableError thisError = new(ex)
                     {
                         RequestUrl = url,
                         UserId = UserId ?? Guid.Empty
