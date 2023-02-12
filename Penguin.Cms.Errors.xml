@@ -60,6 +60,7 @@
         </member>
         <member name="P:Penguin.Cms.Errors.AuditableError.Os64Bit">
              <summary>
+            
              </summary>
         </member>
         <member name="P:Penguin.Cms.Errors.AuditableError.OsVersionString">
